@@ -1,8 +1,20 @@
+$gap: 5px;
+
 .gameContainer {
   display: flex;
   flex-direction: column;
+  width: calc(750px + $gap * 14);
+  margin: auto;
+  gap: $gap;
+  background-color: #04292e;
 }
 .gameContainerRow {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  column-gap: $gap;
+}
+
+.titel {
+  text-align: center;
 }

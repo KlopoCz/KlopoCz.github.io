@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { determineWinner } from "../components/DetermineWinner";
 export default function Game() {
   const [gameState, setGameState] = useState([]);
+  //also required to change in game.module.css
   const [gameSize, setGameSize] = useState(15);
+  // ----
   const [player, setPlayer] = useState(true);
 
   const initialazeGameState = () => {
@@ -30,17 +32,16 @@ export default function Game() {
     let gameStateCopy = gameState;
     gameStateCopy[cordinents[0]][cordinents[1]] = player ? 1 : 2;
     setGameState(gameStateCopy);
-    console.table(gameState);
   };
 
   const handleOnCellClick = (index) => {
     setPlayer(!player);
     updateState(index);
-    determineWinner(index);
+    determineWinner(index, gameState, player);
   };
   return (
     <div>
-      <h1>hello it is game time</h1>
+      <h1 className={styles.titel}>TicTacToe</h1>
       <div className={styles.gameContainer}>
         {gameState.map((elementColumn, indexColumn) => {
           return (
