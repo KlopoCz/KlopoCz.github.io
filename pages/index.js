@@ -4,12 +4,12 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <h1>
-        welcome to this amazing tic tac toe game mark 5(probably, i lost count)
-      </h1>
+      <h1>welcome to this amazing tic tac toe game mark 5(probably, i lost count)</h1>
       <Link href="/Game">
         <a>start a game </a>
-      </Link>
+      </Link>{" "}
+      <div className={styles.preloadCircle}></div>
+      <div className={styles.preloadNone}></div>
     </div>
   );
 }
