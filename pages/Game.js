@@ -2,11 +2,14 @@ import TicTacToeCell from "../components/TicTacToeCell";
 import styles from "../styles/Game.module.scss";
 import { useState, useEffect } from "react";
 import { determineWinner } from "../components/DetermineWinner";
+import Alert from "../components/Alert";
 export default function Game() {
+  const [initialGameState, setInitialGameState] = useState([]);
   const [gameState, setGameState] = useState([]);
   //also required to change in game.module.css
   const [gameSize, setGameSize] = useState(15);
   // ----
+  const [gameStatus, setGameStatus] = useState(false);
   const [player, setPlayer] = useState(true);
 
   const initialazeGameState = () => {
@@ -20,24 +23,31 @@ export default function Game() {
       arr = [...arr, arrRow];
     }
     console.table(arr);
-    setGameState(arr);
+    return arr;
+  };
+
+  const gameRestart = () => {
+    setGameStatus(false);
+    setGameState(initialazeGameState());
+    setPlayer(true);
   };
 
   useEffect(() => {
-    initialazeGameState();
+    gameRestart();
   }, []);
 
   const updateState = (index) => {
-    let cordinents = index.split("-");
     let gameStateCopy = gameState;
-    gameStateCopy[cordinents[0]][cordinents[1]] = player ? 1 : 2;
+    gameStateCopy[index[0]][index[1]] = player ? 1 : 2;
     setGameState(gameStateCopy);
   };
 
   const handleOnCellClick = (index) => {
-    setPlayer(!player);
-    updateState(index);
-    determineWinner(index, gameState, player);
+    if (!gameStatus) {
+      setPlayer(!player);
+      updateState(index);
+      setGameStatus(determineWinner(index, gameState, player));
+    }
   };
   return (
     <div>
@@ -52,7 +62,9 @@ export default function Game() {
                     player={player}
                     handleOnCellClick={handleOnCellClick}
                     key={`${indexColumn}-${indexRow}`}
-                    index={`${indexColumn}-${indexRow}`}
+                    index={[indexColumn, indexRow]}
+                    gameStatus={gameStatus}
+                    gameState={gameState}
                   ></TicTacToeCell>
                 );
               })}
@@ -60,6 +72,7 @@ export default function Game() {
           );
         })}
       </div>
+      {gameStatus ? <Alert gameRestart={gameRestart}></Alert> : ""}
     </div>
   );
 }

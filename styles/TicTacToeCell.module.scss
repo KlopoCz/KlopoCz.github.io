@@ -1,23 +1,13 @@
-%cell {
+.playerNone {
   width: 50px;
   height: 50px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-.playerBlue {
-  @extend %cell;
-}
-.playerRed {
-  @extend %cell;
-}
-.playerNone {
-  @extend %cell;
+
   background-color: #2ec2a0;
 }
-.reg1 {
-  animation: show ease 0.5s;
-}
+.reg1,
 .reg2 {
   animation: show ease 0.5s;
 }

@@ -1,0 +1,10 @@
+<svg width="146" height="59" viewBox="0 0 146 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="logoContainer">
+<g id="reg">
+<rect id="reg2" x="17.887" y="9.36401" width="9" height="69" rx="4.5" transform="rotate(-45 17.887 9.36401)" fill="#D43A30"/>
+<rect id="reg1" x="66.6774" y="3" width="9" height="69" rx="4.5" transform="rotate(45 66.6774 3)" fill="#D43A30"/>
+</g>
+<path id="circle" fill-rule="evenodd" clip-rule="evenodd" d="M101.887 58C117.903 58 130.887 45.0163 130.887 29C130.887 12.9837 117.903 0 101.887 0C85.8708 0 72.887 12.9837 72.887 29C72.887 45.0163 85.8708 58 101.887 58ZM102 49C113.046 49 122 40.0457 122 29C122 17.9543 113.046 9 102 9C90.9543 9 82 17.9543 82 29C82 40.0457 90.9543 49 102 49Z" fill="#05282E"/>
+<rect id="crossLine" y="40.4644" width="146.644" height="6" rx="3" transform="rotate(-10 0 40.4644)" fill="black" fill-opacity="0.8"/>
+</g>
+</svg>

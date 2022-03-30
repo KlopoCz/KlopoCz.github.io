@@ -1,20 +1,21 @@
 import styles from "../styles/TicTacToeCell.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function TicTacToeCell({ index, player, handleOnCellClick }) {
+export default function TicTacToeCell({ index, player, handleOnCellClick, gameStatus, gameState }) {
   const [played, setPlayed] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState();
-  const [className, setClassName] = useState(styles.playerNone);
   const setColor = () => {
-    setClassName(player ? styles.playerBlue : styles.playerRed);
     setPlayed(true);
     setCurrentPlayer(player);
   };
+  useEffect(() => {
+    if (gameState[index[0]][index[1]] === 0) setPlayed(false);
+  }, [gameState]);
   return (
     <div
-      className={className}
+      className={styles.playerNone}
       onClick={() => {
-        if (!played) {
+        if (!played && !gameStatus) {
           handleOnCellClick(index);
           setColor();
         }

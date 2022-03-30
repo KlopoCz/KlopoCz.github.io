@@ -1,7 +1,6 @@
 export const determineWinner = (index, board, player) => {
-  const coordinates = index.split("-");
-  const x = Number(coordinates[0]);
-  const y = Number(coordinates[1]);
+  const x = Number(index[0]);
+  const y = Number(index[1]);
   const playerNumber = player === true ? 1 : 2;
   const savePosiblePositions = (arr) => {
     let validPositions = [];
@@ -33,5 +32,6 @@ export const determineWinner = (index, board, player) => {
   let columnScore = countTheLines(up) + countTheLines(down);
   let diagonalUpScore = countTheLines(rightUp) + countTheLines(leftDown);
   let diagonalDownSocre = countTheLines(leftUp) + countTheLines(rightDown);
-  if (rowScore === 4 || columnScore === 4 || diagonalDownSocre === 4 || diagonalUpScore === 4) alert("win");
+  if (rowScore === 4 || columnScore === 4 || diagonalDownSocre === 4 || diagonalUpScore === 4) return true;
+  return false;
 };
