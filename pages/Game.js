@@ -22,7 +22,7 @@ export default function Game() {
       }
       arr = [...arr, arrRow];
     }
-    console.table(arr);
+
     return arr;
   };
 

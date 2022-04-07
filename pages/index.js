@@ -8,8 +8,6 @@ export default function Home() {
       <Link href="/Game">
         <a>start a game </a>
       </Link>{" "}
-      <div className={styles.preloadCircle}></div>
-      <div className={styles.preloadNone}></div>
     </div>
   );
 }
