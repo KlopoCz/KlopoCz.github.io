@@ -1,54 +1,73 @@
 import TicTacToeCell from "../components/TicTacToeCell";
 import styles from "../styles/Game.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { determineWinner } from "../components/DetermineWinner";
 import Alert from "../components/Alert";
+
 export default function Game() {
-  const [initialGameState, setInitialGameState] = useState([]);
-  const [gameState, setGameState] = useState([]);
-  //also required to change in game.module.css
-  const [gameSize, setGameSize] = useState(15);
-  // ----
+  const [gameState, setGameState] = useState([
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]);
   const [gameStatus, setGameStatus] = useState(false);
-  const [player, setPlayer] = useState(true);
-
-  const initialazeGameState = () => {
-    //create a 2D array where a game state will be stored
-    let arr = [];
-    for (let x = 0; x < gameSize; x++) {
-      let arrRow = [];
-      for (let y = 0; y < gameSize; y++) {
-        arrRow = [...arrRow, 0];
-      }
-      arr = [...arr, arrRow];
-    }
-
-    return arr;
-  };
+  const [player, setPlayer] = useState(false);
 
   const gameRestart = () => {
     setGameStatus(false);
-    setGameState(initialazeGameState());
-    setPlayer(true);
+    setGameState((gameState) => {
+      gameState = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
+      return gameState;
+    });
+    setPlayer(false);
   };
 
   useEffect(() => {
     gameRestart();
   }, []);
 
-  const updateState = (index) => {
-    let gameStateCopy = gameState;
-    gameStateCopy[index[0]][index[1]] = player ? 1 : 2;
-    setGameState(gameStateCopy);
-  };
+  const changePlayer = useCallback((indexRow, indexColumn) => {
+    setPlayer((player) => {
+      player = !player;
 
-  const handleOnCellClick = (index) => {
-    if (!gameStatus) {
-      setPlayer(!player);
-      updateState(index);
-      setGameStatus(determineWinner(index, gameState, player));
-    }
-  };
+      setGameState((gameState) => {
+        gameState[indexColumn][indexRow] = player ? 1 : 2;
+
+        setGameStatus(determineWinner([indexColumn, indexRow], gameState, player));
+        return gameState;
+      });
+      return player;
+    });
+  }, []);
+
   return (
     <div>
       <h1 className={styles.titel}>TicTacToe</h1>
@@ -59,12 +78,11 @@ export default function Game() {
               {gameState[indexColumn].map((elementRow, indexRow) => {
                 return (
                   <TicTacToeCell
-                    player={player}
-                    handleOnCellClick={handleOnCellClick}
-                    key={`${indexColumn}-${indexRow}`}
-                    index={[indexColumn, indexRow]}
-                    gameStatus={gameStatus}
-                    gameState={gameState}
+                    indexRow={indexRow}
+                    indexColumn={indexColumn}
+                    key={indexRow}
+                    elementRow={elementRow}
+                    changePlayer={elementRow === 0 ? changePlayer : undefined}
                   ></TicTacToeCell>
                 );
               })}

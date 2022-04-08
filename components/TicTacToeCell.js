@@ -1,28 +1,26 @@
 import styles from "../styles/TicTacToeCell.module.scss";
-import { useState, useEffect } from "react";
+import { useState, memo, useEffect } from "react";
 
-export default function TicTacToeCell({ index, player, handleOnCellClick, gameStatus, gameState }) {
+function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
   const [played, setPlayed] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState();
-  const setColor = () => {
-    setPlayed(true);
-    setCurrentPlayer(player);
-  };
+
   useEffect(() => {
-    if (gameState[index[0]][index[1]] === 0) setPlayed(false);
-  }, [gameState]);
+    if (elementRow === 0) setPlayed(false);
+  }, [elementRow]);
+
   return (
     <div
       className={styles.playerNone}
       onClick={() => {
-        if (!played && !gameStatus) {
-          handleOnCellClick(index);
-          setColor();
+        if (!played) {
+          setPlayed(true);
+
+          changePlayer(indexRow, indexColumn);
         }
       }}
     >
       {played ? (
-        currentPlayer ? (
+        elementRow === 1 ? (
           <div>
             <svg
               className={styles.svgReg}
@@ -85,3 +83,5 @@ export default function TicTacToeCell({ index, player, handleOnCellClick, gameSt
     </div>
   );
 }
+
+export default memo(TicTacToeCell);
