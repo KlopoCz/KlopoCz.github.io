@@ -6,9 +6,12 @@
   background-size: cover;
   background-color: #2ec2a0;
 }
-.reg1,
+.reg1 {
+  animation: show ease 0.2s;
+}
+
 .reg2 {
-  animation: show ease 0.5s;
+  animation: show ease 0.2s;
 }
 @keyframes show {
   from {
@@ -21,7 +24,7 @@
 .circle {
   stroke-dashoffset: 1000;
   stroke-dasharray: 1000;
-  animation: stroke ease-in 1s forwards;
+  animation: stroke ease-in 0.3s forwards;
 }
 
 @keyframes stroke {

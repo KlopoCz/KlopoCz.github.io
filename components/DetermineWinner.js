@@ -42,15 +42,55 @@ export const determineWinner = (index, board, player) => {
     }
     return last;
   };
+  const randomizeLine = (direction, sideOne, sideTwo) => {
+    let randomY = Math.random();
+    let randomY1 = Math.random();
+    let randomY2 = Math.random();
+    let randomX = Math.random();
+    let randomX1 = Math.random();
+    let randomX2 = Math.random();
+    let a = getUttermost(sideOne);
+    let b = getUttermost(sideTwo);
+    const addLength = 0.3;
+    const addLengthD = 0.2;
+    a[0] += randomY < 0.5 ? randomY1 * -0.1 : randomY1 * 0.1;
+    a[1] += randomX < 0.5 ? randomX1 * -0.1 : randomX1 * 0.1;
+    b[0] += randomY < 0.5 ? randomY2 * 0.1 : randomY2 * -0.1;
+    b[1] += randomX < 0.5 ? randomX2 * 0.1 : randomX2 * -0.1;
+    if (direction === "row") {
+      a[1] += addLength;
+      b[1] -= addLength;
+      return [a, b];
+    }
+    if (direction === "column") {
+      a[0] -= addLength;
+      b[0] += addLength;
+      return [a, b];
+    }
+    if (direction === "diagonalUp") {
+      a[1] += addLengthD;
+      a[0] -= addLengthD;
+      b[1] -= addLengthD;
+      b[0] += addLengthD;
+      return [a, b];
+    }
+    if (direction === "diagonalDown") {
+      a[1] += addLengthD;
+      a[0] += addLengthD;
+      b[1] -= addLengthD;
+      b[0] -= addLengthD;
+      return [a, b];
+    }
+  };
 
   let rowScore = countTheLines(left) + countTheLines(right);
   let columnScore = countTheLines(up) + countTheLines(down);
   let diagonalUpScore = countTheLines(rightUp) + countTheLines(leftDown);
   let diagonalDownScore = countTheLines(leftUp) + countTheLines(rightDown);
 
-  if (rowScore === 4) return { status: true, uttermost: [getUttermost(right), getUttermost(left)] };
-  if (columnScore === 4) return { status: true, uttermost: [getUttermost(up), getUttermost(down)] };
-  if (diagonalUpScore === 4) return { status: true, uttermost: [getUttermost(rightUp), getUttermost(leftDown)] };
-  if (diagonalDownScore === 4) return { status: true, uttermost: [getUttermost(leftUp), getUttermost(rightDown)] };
+  if (rowScore === 4) return { status: true, uttermost: randomizeLine("row", right, left) };
+  if (columnScore === 4) return { status: true, uttermost: randomizeLine("column", up, down) };
+  if (diagonalUpScore === 4) return { status: true, uttermost: randomizeLine("diagonalUp", rightUp, leftDown) };
+  if (diagonalDownScore === 4) return { status: true, uttermost: randomizeLine("diagonalDown", rightDown, leftUp) };
   return { status: false, uttermost: [] };
 };
