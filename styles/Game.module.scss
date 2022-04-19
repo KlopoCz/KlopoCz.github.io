@@ -1,4 +1,8 @@
 $gap: 5px;
+.size {
+  width: calc(750px + $gap * 14);
+  height: calc(750px + $gap * 14);
+}
 
 .gameContainer {
   display: flex;
@@ -18,14 +22,19 @@ $gap: 5px;
 .titel {
   text-align: center;
 }
+.container {
+  position: relative;
+  display: block;
+  margin: auto;
+  @extend .size;
+}
 .svgCont {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 20px;
+  @extend .size;
 }
 .svg {
-  width: calc(750px + $gap * 14);
-  height: calc(750px + $gap * 14);
+  @extend .size;
 }

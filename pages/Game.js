@@ -72,44 +72,45 @@ export default function Game() {
   return (
     <div>
       <h1 className={styles.titel}>TicTacToe</h1>
-      <div className={styles.gameContainer}>
-        {gameState.map((elementColumn, indexColumn) => {
-          return (
-            <div className={styles.gameContainerRow} key={indexColumn}>
-              {gameState[indexColumn].map((elementRow, indexRow) => {
-                return (
-                  <TicTacToeCell
-                    indexRow={indexRow}
-                    indexColumn={indexColumn}
-                    key={indexRow}
-                    elementRow={elementRow}
-                    changePlayer={elementRow === 0 ? changePlayer : undefined}
-                  ></TicTacToeCell>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-
-      {gameStatus ? (
-        <div className={styles.svgCont}>
-          <svg className={styles.svg} viewBox="0 0 820 820" xmlns="http://www.w3.org/2000/svg">
-            <line
-              className={styles.svg}
-              x1={uttermostCordinents[0][1] * 50 + (uttermostCordinents[0][1] - 1) * 5 + 30}
-              y1={uttermostCordinents[0][0] * 50 + (uttermostCordinents[0][0] - 1) * 5 + 30}
-              x2={uttermostCordinents[1][1] * 50 + (uttermostCordinents[1][1] - 1) * 5 + 30}
-              y2={uttermostCordinents[1][0] * 50 + (uttermostCordinents[1][0] - 1) * 5 + 30}
-              stroke="black"
-              strokeWidth="6"
-              strokeLinecap="round"
-            />
-          </svg>
+      <div className={styles.container}>
+        {gameStatus ? (
+          <div className={styles.svgCont}>
+            <svg className={styles.svg} viewBox="0 0 820 820" xmlns="http://www.w3.org/2000/svg">
+              <line
+                className={styles.svg}
+                x1={uttermostCordinents[0][1] * 50 + (uttermostCordinents[0][1] - 1) * 5 + 30}
+                y1={uttermostCordinents[0][0] * 50 + (uttermostCordinents[0][0] - 1) * 5 + 30}
+                x2={uttermostCordinents[1][1] * 50 + (uttermostCordinents[1][1] - 1) * 5 + 30}
+                y2={uttermostCordinents[1][0] * 50 + (uttermostCordinents[1][0] - 1) * 5 + 30}
+                stroke="black"
+                strokeWidth="6"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        ) : (
+          ""
+        )}
+        <div className={styles.gameContainer}>
+          {gameState.map((elementColumn, indexColumn) => {
+            return (
+              <div className={styles.gameContainerRow} key={indexColumn}>
+                {gameState[indexColumn].map((elementRow, indexRow) => {
+                  return (
+                    <TicTacToeCell
+                      indexRow={indexRow}
+                      indexColumn={indexColumn}
+                      key={indexRow}
+                      elementRow={elementRow}
+                      changePlayer={elementRow === 0 ? changePlayer : undefined}
+                    ></TicTacToeCell>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
-      ) : (
-        ""
-      )}
+      </div>
       {gameStatus ? <Alert gameRestart={gameRestart}></Alert> : ""}
     </div>
   );

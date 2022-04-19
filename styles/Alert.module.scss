@@ -32,9 +32,10 @@
   margin-bottom: 25px;
 }
 .shadow {
-  position: absolute;
-  left: 0px;
-  top: 0px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: rgba(32, 32, 33, 0.25);
