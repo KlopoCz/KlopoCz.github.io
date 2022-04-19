@@ -7,7 +7,7 @@ export const determineWinner = (index, board, player) => {
     for (let i = 0; i < arr.length; i = i + 2) {
       if (arr[i] < 0 || arr[i] > board.length - 1 || arr[i + 1] < 0 || arr[i + 1] > board.length - 1)
         return validPositions;
-      validPositions = [...validPositions, board[arr[i]][arr[i + 1]]];
+      validPositions = [...validPositions, [arr[i], arr[i + 1]]];
     }
     return validPositions;
   };
@@ -22,16 +22,35 @@ export const determineWinner = (index, board, player) => {
 
   const countTheLines = (arr) => {
     let score = 0;
-    for (let a = 0; a < arr.length + 1; a++) {
-      if (arr[a] === playerNumber) score++;
-      else return score;
+    if (arr.length !== 0) {
+      for (let a = 0; a < arr.length; a++) {
+        if (board[arr[a][0]][arr[a][1]] === playerNumber) score++;
+        else return score;
+      }
     }
+
+    return score;
+  };
+  const getUttermost = (arr) => {
+    let last = [x, y];
+    if (arr.length === 0) return last;
+    else {
+      for (let a = 0; a < arr.length; a++) {
+        if (board[arr[a][0]][arr[a][1]] === playerNumber) last = [arr[a][0], arr[a][1]];
+        else return last;
+      }
+    }
+    return last;
   };
 
   let rowScore = countTheLines(left) + countTheLines(right);
   let columnScore = countTheLines(up) + countTheLines(down);
   let diagonalUpScore = countTheLines(rightUp) + countTheLines(leftDown);
-  let diagonalDownSocre = countTheLines(leftUp) + countTheLines(rightDown);
-  if (rowScore === 4 || columnScore === 4 || diagonalDownSocre === 4 || diagonalUpScore === 4) return true;
-  return false;
+  let diagonalDownScore = countTheLines(leftUp) + countTheLines(rightDown);
+
+  if (rowScore === 4) return { status: true, uttermost: [getUttermost(right), getUttermost(left)] };
+  if (columnScore === 4) return { status: true, uttermost: [getUttermost(up), getUttermost(down)] };
+  if (diagonalUpScore === 4) return { status: true, uttermost: [getUttermost(rightUp), getUttermost(leftDown)] };
+  if (diagonalDownScore === 4) return { status: true, uttermost: [getUttermost(leftUp), getUttermost(rightDown)] };
+  return { status: false, uttermost: [] };
 };

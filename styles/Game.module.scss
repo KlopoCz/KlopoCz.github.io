@@ -18,3 +18,14 @@ $gap: 5px;
 .titel {
   text-align: center;
 }
+.svgCont {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 20px;
+}
+.svg {
+  width: calc(750px + $gap * 14);
+  height: calc(750px + $gap * 14);
+}
