@@ -3,6 +3,7 @@ import styles from "../styles/Game.module.scss";
 import { useState, useEffect, useCallback } from "react";
 import { determineWinner } from "../components/DetermineWinner";
 import Alert from "../components/Alert";
+import { AnimatePresence } from "framer-motion";
 
 export default function Game() {
   const [gameState, setGameState] = useState([
@@ -77,7 +78,7 @@ export default function Game() {
           <div className={styles.svgCont}>
             <svg className={styles.svg} viewBox="0 0 820 820" xmlns="http://www.w3.org/2000/svg">
               <line
-                className={styles.svg}
+                className={styles.svgLine}
                 x1={uttermostCordinents[0][1] * 50 + (uttermostCordinents[0][1] - 1) * 5 + 30}
                 y1={uttermostCordinents[0][0] * 50 + (uttermostCordinents[0][0] - 1) * 5 + 30}
                 x2={uttermostCordinents[1][1] * 50 + (uttermostCordinents[1][1] - 1) * 5 + 30}
@@ -111,7 +112,7 @@ export default function Game() {
           })}
         </div>
       </div>
-      {gameStatus ? <Alert gameRestart={gameRestart}></Alert> : ""}
+      <AnimatePresence>{gameStatus ? <Alert gameRestart={gameRestart}></Alert> : ""}</AnimatePresence>
     </div>
   );
 }
