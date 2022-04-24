@@ -2,7 +2,7 @@
   width: 310px;
   height: 300px;
   border-radius: 25px;
-  background-color: white;
+  background-color: var(--alert-background);
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -18,6 +18,7 @@
   font-size: 24px;
   line-height: 29px;
   margin-bottom: 0;
+  color: var(--font-color-alert);
 }
 .subTitle {
   font-style: normal;
@@ -26,6 +27,7 @@
   line-height: 12px;
   text-align: center;
   margin-bottom: 30px;
+  color: var(--font-color-alert);
 }
 
 .buttonContainer {
@@ -38,5 +40,5 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(32, 32, 33, 0.25);
+  background-color: var(--shadow);
 }

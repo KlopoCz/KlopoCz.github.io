@@ -1,8 +1,10 @@
 import styles from "../styles/TicTacToeCell.module.scss";
-import { useState, memo, useEffect } from "react";
+import { useState, memo, useEffect, useContext } from "react";
+import { ThemeContext } from "./Theams";
 
 function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
   const [played, setPlayed] = useState(false);
+  const { themesState, setThemesState } = useContext(ThemeContext);
 
   useEffect(() => {
     if (elementRow === 0) setPlayed(false);
@@ -31,7 +33,7 @@ function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
               xmlns="http://www.w3.org/2000/svg"
             >
               <g id="regCont">
-                <rect width="100" height="100" fill="#2ec2a0" />
+                <rect width="100" height="100" fill={themesState.themes[themesState.currentTheme].colors.primary} />
                 <g id="reg">
                   <rect
                     className={styles.reg1}
@@ -41,7 +43,7 @@ function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
                     height="69"
                     rx="4.5"
                     transform="rotate(-45 22 28.364)"
-                    fill="#D43A30"
+                    fill={themesState.themes[themesState.currentTheme].colors.X}
                   />
                   <rect
                     className={styles.reg2}
@@ -51,7 +53,7 @@ function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
                     height="69"
                     rx="4.5"
                     transform="rotate(45 70.7903 22)"
-                    fill="#D43A30"
+                    fill={themesState.themes[themesState.currentTheme].colors.X}
                   />
                 </g>
               </g>
@@ -60,13 +62,13 @@ function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
         ) : (
           <div>
             <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="100" height="100" fill="#2ec2a0"></rect>
+              <rect width="100" height="100" fill={themesState.themes[themesState.currentTheme].colors.primary}></rect>
               <circle
                 className={styles.circle}
                 cx="50"
                 cy="50"
                 r="27"
-                stroke="#F8FDFC"
+                stroke={themesState.themes[themesState.currentTheme].colors.O}
                 strokeWidth="9"
                 fillOpacity="0"
               />
@@ -76,7 +78,7 @@ function TicTacToeCell({ indexRow, indexColumn, elementRow, changePlayer }) {
       ) : (
         <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="noneCont">
-            <rect width="100" height="100" fill="#2ec2a0" />
+            <rect width="100" height="100" fill={themesState.themes[themesState.currentTheme].colors.primary} />
           </g>
         </svg>
       )}

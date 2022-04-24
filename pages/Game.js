@@ -1,9 +1,10 @@
 import TicTacToeCell from "../components/TicTacToeCell";
 import styles from "../styles/Game.module.scss";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import { determineWinner } from "../components/DetermineWinner";
 import Alert from "../components/Alert";
 import { AnimatePresence } from "framer-motion";
+import { ThemeContext } from "../components/Theams";
 
 export default function Game() {
   const [gameState, setGameState] = useState([
@@ -23,6 +24,7 @@ export default function Game() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]);
+  const { themesState, setThemesState } = useContext(ThemeContext);
   const [gameStatus, setGameStatus] = useState(false);
   const [player, setPlayer] = useState(false);
   const [uttermostCordinents, setUttermostCordinents] = useState([]);
@@ -83,9 +85,14 @@ export default function Game() {
                 y1={uttermostCordinents[0][0] * 50 + (uttermostCordinents[0][0] - 1) * 5 + 30}
                 x2={uttermostCordinents[1][1] * 50 + (uttermostCordinents[1][1] - 1) * 5 + 30}
                 y2={uttermostCordinents[1][0] * 50 + (uttermostCordinents[1][0] - 1) * 5 + 30}
-                stroke="black"
+                stroke={
+                  player
+                    ? themesState.themes[themesState.currentTheme].colors.X
+                    : themesState.themes[themesState.currentTheme].colors.O
+                }
                 strokeWidth="6"
                 strokeLinecap="round"
+                opacity="0.6"
               />
             </svg>
           </div>

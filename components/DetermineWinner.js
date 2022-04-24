@@ -52,7 +52,7 @@ export const determineWinner = (index, board, player) => {
     let a = getUttermost(sideOne);
     let b = getUttermost(sideTwo);
     const addLength = 0.3;
-    const addLengthD = 0.2;
+    const addLengthD = 0.25;
     a[0] += randomY < 0.5 ? randomY1 * -0.1 : randomY1 * 0.1;
     a[1] += randomX < 0.5 ? randomX1 * -0.1 : randomX1 * 0.1;
     b[0] += randomY < 0.5 ? randomY2 * 0.1 : randomY2 * -0.1;

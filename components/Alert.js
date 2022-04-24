@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../styles/Alert.module.scss";
 import logo from "../public/logoContainer.svg";
-import Button from "./Button";
+import { Button } from "./Button";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 export default function Alert({ gameRestart }) {

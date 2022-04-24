@@ -1,5 +1,5 @@
 .container {
-  background: #42d3b6;
+  background: var(--button-color);
   border-radius: 12px;
   padding: 4px 13px;
   cursor: pointer;
@@ -12,4 +12,5 @@
   text-align: center;
   text-transform: uppercase;
   user-select: none;
+  color: var(--button-color-text);
 }

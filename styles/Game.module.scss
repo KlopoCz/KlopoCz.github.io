@@ -10,7 +10,7 @@ $gap: 5px;
   width: calc(750px + $gap * 14);
   margin: auto;
   gap: $gap;
-  background-color: #04292e;
+  background-color: var(--secondary);
 }
 .gameContainerRow {
   display: flex;
