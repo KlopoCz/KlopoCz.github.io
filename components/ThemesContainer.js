@@ -1,5 +1,7 @@
 import { ThemeContext } from "./Theams";
 import { useContext, useEffect } from "react";
+import ThemeButton from "./ThemeButton";
+import styles from "../styles/ThemesContainer.module.scss";
 export default function ThemesContainer() {
   const { themesState, setThemesState } = useContext(ThemeContext);
   const changeTheme = (choice) => {
@@ -21,14 +23,34 @@ export default function ThemesContainer() {
     root.style.setProperty("--button-color", themesState.themes[themesState.currentTheme].colors.buttonColor);
     root.style.setProperty("--button-color-text", themesState.themes[themesState.currentTheme].colors.buttonColorText);
     root.style.setProperty("--alert-background", themesState.themes[themesState.currentTheme].colors.alertBackground);
+    root.style.setProperty("--input-underline", themesState.themes[themesState.currentTheme].colors.inputUnderline);
+    root.style.setProperty("--home-button", themesState.themes[themesState.currentTheme].colors.homeButton);
+    root.style.setProperty("--home-button-text", themesState.themes[themesState.currentTheme].colors.homeButtonText);
+    root.style.setProperty("--home-input", themesState.themes[themesState.currentTheme].colors.homeInput);
     root.style.setProperty("--X", themesState.themes[themesState.currentTheme].colors.X);
     root.style.setProperty("--O", themesState.themes[themesState.currentTheme].colors.O);
   }, [themesState.currentTheme]);
   return (
-    <div>
-      <div onClick={() => changeTheme("classic")}>classic</div>
-      <div onClick={() => changeTheme("light")}>light</div>
-      <div onClick={() => changeTheme("dark")}>dark</div>
+    <div className={styles.Cont}>
+      <ThemeButton
+        changeTheme={changeTheme}
+        border={themesState.currentTheme === "classic" ? "4px solid #FFFFFF " : "none"}
+        color="linear-gradient(to right bottom, rgb(66,211,182) 50%, rgb(4,41,46) 50%) "
+        text="classic"
+      ></ThemeButton>
+
+      <ThemeButton
+        changeTheme={changeTheme}
+        border={themesState.currentTheme === "light" ? "4px solid #212121 " : "none"}
+        color="linear-gradient(to right bottom, rgba(36,75,94,1) 50%, rgba(255,255,255,1) 50%)"
+        text="light"
+      ></ThemeButton>
+      <ThemeButton
+        changeTheme={changeTheme}
+        border={themesState.currentTheme === "dark" ? "4px solid #FFFFFF " : "none"}
+        color="linear-gradient(56deg, rgba(33,33,33,1) 50%, rgba(33,33,33,1) 50%)"
+        text="dark"
+      ></ThemeButton>
     </div>
   );
 }
